@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 30% 98%;
+    --foreground: 20 14% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14% 12%;
+    --primary: 168 35% 22%;
+    --primary-foreground: 40 30% 98%;
+    --secondary: 40 30% 94%;
+    --secondary-foreground: 20 14% 18%;
+    --muted: 40 24% 93%;
+    --muted-foreground: 20 8% 46%;
+    --accent: 168 30% 88%;
+    --accent-foreground: 168 35% 18%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 40 30% 98%;
+    --border: 40 18% 88%;
+    --input: 40 18% 88%;
+    --ring: 168 35% 22%;
+    --chart-1: 168 35% 30%;
+    --chart-2: 200 40% 45%;
+    --chart-3: 30 60% 55%;
+    --chart-4: 340 45% 55%;
+    --chart-5: 45 70% 58%;
+    --radius: 0.75rem;
+    --gold: 38 55% 52%;
+  }
+  .dark {
+    --background: 200 20% 7%;
+    --foreground: 40 30% 96%;
+    --card: 200 18% 10%;
+    --card-foreground: 40 30% 96%;
+    --popover: 200 18% 10%;
+    --popover-foreground: 40 30% 96%;
+    --primary: 168 30% 72%;
+    --primary-foreground: 200 20% 8%;
+    --secondary: 200 14% 16%;
+    --secondary-foreground: 40 30% 96%;
+    --muted: 200 14% 16%;
+    --muted-foreground: 40 12% 65%;
+    --accent: 168 24% 20%;
+    --accent-foreground: 168 30% 82%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 40 30% 98%;
+    --border: 200 14% 20%;
+    --input: 200 14% 20%;
+    --ring: 168 30% 72%;
+    --chart-1: 168 30% 60%;
+    --chart-2: 200 50% 60%;
+    --chart-3: 30 65% 60%;
+    --chart-4: 340 55% 62%;
+    --chart-5: 45 75% 62%;
+    --gold: 38 60% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-white/40 dark:border-white/10;
+  }
+  .glass-card {
+    @apply glass rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)];
+  }
+  .glass-nav {
+    @apply glass backdrop-saturate-150;
+  }
+  .luxury-gradient {
+    background: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(var(--accent) / 0.6), transparent),
+                radial-gradient(ellipse 60% 50% at 80% 100%, hsl(var(--primary) / 0.12), transparent);
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground to-muted-foreground;
+  }
+  .gold-text {
+    color: hsl(var(--gold));
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  .animate-fade-up {
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+  .animate-confetti {
+    animation: confetti 3s ease-out forwards;
+  }
+  .animate-ring-fill {
+    animation: ringFill 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .perspective {
+    perspective: 2000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+@keyframes confetti {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+}
+@keyframes ringFill {
+  from { stroke-dashoffset: var(--ring-circumference); }
+  to { stroke-dashoffset: var(--ring-offset); }
+}
+
+::selection {
+  background: hsl(var(--primary) / 0.2);
+}
+
+input, textarea, button {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}

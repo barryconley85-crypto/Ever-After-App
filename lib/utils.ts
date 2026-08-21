@@ -10,25 +10,40 @@ export function generateSlug(): string {
 }
 
 export function getInitials(first: string, last: string): string {
-  return `${first.charAt(0)}${last.charAt(0)}`.toUpperCase();
+  return `<LaTex>{first.charAt(0)}</LaTex>{last.charAt(0)}`.toUpperCase();
 }
 
 export function formatGuestUrl(slug: string): string {
   const base = typeof window !== 'undefined' ? window.location.origin : '';
-  return `${base}/g/${slug}`;
+  return `<LaTex>{base}/g/</LaTex>{slug}`;
 }
 
 export function formatAdminUrl(slug: string): string {
   const base = typeof window !== 'undefined' ? window.location.origin : '';
-  return `${base}/admin/w/${slug}`;
+  return `<LaTex>{base}/admin/w/</LaTex>{slug}`;
 }
 
 export function formatGuestTokenUrl(token: string): string {
   const base = typeof window !== 'undefined' ? window.location.origin : '';
-  return `${base}/guest/${token}`;
+  return `<LaTex>{base}/guest/</LaTex>{token}`;
+}
+
+export function getErrorMessage(error: unknown, fallback: string): string {
+  if (error instanceof Error && error.message.trim()) {
+    return error.message;
+  }
+
+  if (typeof error === 'object' && error !== null && 'message' in error) {
+    const message = (error as { message?: unknown }).message;
+    if (typeof message === 'string' && message.trim()) {
+      return message;
+    }
+  }
+
+  return fallback;
 }
 
 export function getMediaPublicUrl(path: string): string {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-  return `${supabaseUrl}/storage/v1/object/public/wedding-media/${path}`;
+  return `<LaTex>{supabaseUrl}/storage/v1/object/public/wedding-media/</LaTex>{path}`;
 }
